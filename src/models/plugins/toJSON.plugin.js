@@ -33,6 +33,8 @@ const toJSON = (schema) => {
       delete ret.__v;
       delete ret.createdAt;
       delete ret.updatedAt;
+      delete ret.createdBy;
+      delete ret.updatedBy;
       if (transform) {
         return transform(doc, ret, options);
       }

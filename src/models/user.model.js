@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema(
     },
     email: {
       type: String,
+      match: /^.*@.*iitism.ac.in$/,
       required: true,
       unique: true,
       trim: true,
@@ -39,6 +40,12 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: roles,
       default: 'user',
+    },
+    moderatorClub: {
+      type: String,
+    },
+    moderatorFest: {
+      type: String,
     },
     isEmailVerified: {
       type: Boolean,
