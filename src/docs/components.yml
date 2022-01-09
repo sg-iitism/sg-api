@@ -47,6 +47,23 @@ components:
         message:
           type: string
 
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        imageUrl:
+          type: string
+        publicId:
+          type: string
+      example:
+        id: 61cdbbcff075593d06d53624
+        title: black bg
+        imageUrl: https://res.cloudinary.com/cl-judge/image/upload/v1640872910/SG/1640872908368.png
+        publicId: 1640872908368          
+
   responses:
     DuplicateEmail:
       description: Email already taken
@@ -84,6 +101,15 @@ components:
           example:
             code: 404
             message: Not found
+    InvalidImageFormat:
+      description: Invalid file type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Invalid file type. Only jpg, png image files are allowed.            
 
   securitySchemes:
     bearerAuth:

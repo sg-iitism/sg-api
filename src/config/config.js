@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const Joi = require('joi');
+const cloudinary = require('cloudinary').v2;
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
@@ -23,6 +24,9 @@ const envVarsSchema = Joi.object()
     SMTP_USERNAME: Joi.string().description('username for email server'),
     SMTP_PASSWORD: Joi.string().description('password for email server'),
     EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
+    CLOUDINARY_CLOUD_NAME: Joi.string().required().description('cloud name of cloudinary'),
+    CLOUDINARY_API_KEY: Joi.string().required().description('API key of cloudinary'),
+    CLOUDINARY_API_SECRET: Joi.string().required().description('API secret of cloudinary'),
   })
   .unknown();
 
@@ -31,6 +35,12 @@ const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' }
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 module.exports = {
   env: envVars.NODE_ENV,
@@ -61,4 +71,5 @@ module.exports = {
     },
     from: envVars.EMAIL_FROM,
   },
+  cloudinary,
 };
