@@ -20,6 +20,11 @@ const defaultRoutes = [
     path: '/images',
     route: imageRoute,
   },
+  // TODO: remove later
+  {
+    path: '/prod-docs',
+    route: docsRoute,
+  },
 ];
 
 const devRoutes = [

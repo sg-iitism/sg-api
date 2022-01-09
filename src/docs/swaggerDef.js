@@ -13,7 +13,7 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: `http://localhost:${config.port}/v1`,
+      url: config.env === 'development' ? `http://localhost:${config.port}/v1` : `https://sg-iitism-api.herokuapp.com/v1`,
     },
   ],
 };
