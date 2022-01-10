@@ -13,6 +13,12 @@ components:
         role:
           type: string
           enum: [user, admin, moderator]
+        moderatorClub:
+          type: string
+        moderatorFest:
+          type: string
+        isEmailVerified:
+          type: boolean
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
@@ -62,7 +68,41 @@ components:
         id: 61cdbbcff075593d06d53624
         title: black bg
         imageUrl: https://res.cloudinary.com/cl-judge/image/upload/v1640872910/SG/1640872908368.png
-        publicId: 1640872908368          
+        publicId: 1640872908368
+
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        details:
+          type: string          
+        imageUrl:
+          type: string
+          format: uri
+        website:
+          type: string
+          format: uri
+        start:
+          type: string
+          format: date-time          
+        end:
+          type: string
+          format: date-time                    
+        festOrganizer:
+          type: string 
+        clubOrganizers:
+          type: array
+          items:
+            type: string
+        showCommonly:
+          type: boolean
+      example:
+        name: test event
+        start: 2022-01-20T16:23:56.057Z
+        end: 2022-01-20T21:23:56.057Z        
 
   responses:
     DuplicateEmail:

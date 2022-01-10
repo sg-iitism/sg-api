@@ -7,8 +7,8 @@ const { cloudinary } = config;
 
 /**
  * Create an image
- * @param {Object} userBody
- * @returns {Promise<User>}
+ * @param {Object} imageBody
+ * @returns {Promise<Image>}
  */
 const createImage = async (req) => {
   const imageBody = { title: req.body.title, imageUrl: req.file.path, createdBy: req.user.id, publicId: req.publicId };
@@ -31,7 +31,7 @@ const getAllImages = async (creatorId) => {
 /**
  * Get image by id
  * @param {ObjectId} id
- * @returns {Promise<User>}
+ * @returns {Promise<Image>}
  */
 const getImageById = async (id) => {
   return Image.findById(id);
@@ -40,7 +40,7 @@ const getImageById = async (id) => {
 /**
  * Delete image by imageId
  * @param {ObjectId} imageId
- * @returns {Promise<User>}
+ * @returns {Promise<Image>}
  */
 const deleteImageById = async (imageId, user) => {
   const image = await getImageById(imageId);
