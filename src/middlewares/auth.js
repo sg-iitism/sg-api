@@ -10,6 +10,9 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   req.user = user;
 
   if (requiredRights.length) {
+    if (!user.isEmailVerified) {
+      return reject(new ApiError(httpStatus.FORBIDDEN, 'Please verify your email address first.'));
+    }
     const userRights = roleRights.get(user.role);
     const hasRequiredRights = requiredRights.every((requiredRight) => userRights.includes(requiredRight));
     if (!hasRequiredRights && req.params.userId !== user.id) {

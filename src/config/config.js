@@ -27,6 +27,7 @@ const envVarsSchema = Joi.object()
     CLOUDINARY_CLOUD_NAME: Joi.string().required().description('cloud name of cloudinary'),
     CLOUDINARY_API_KEY: Joi.string().required().description('API key of cloudinary'),
     CLOUDINARY_API_SECRET: Joi.string().required().description('API secret of cloudinary'),
+    FRONTEND_ADMIN_PANEL: Joi.string().required().uri(),
   })
   .unknown();
 
@@ -72,4 +73,5 @@ module.exports = {
     from: envVars.EMAIL_FROM,
   },
   cloudinary,
+  frontendAdminPanel: envVars.FRONTEND_ADMIN_PANEL,
 };
