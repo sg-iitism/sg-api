@@ -43,9 +43,11 @@ const userSchema = mongoose.Schema(
     },
     moderatorClub: {
       type: String,
+      ref: 'Club',
     },
     moderatorFest: {
       type: String,
+      ref: 'Fest',
     },
     isEmailVerified: {
       type: Boolean,
