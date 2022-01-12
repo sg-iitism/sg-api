@@ -31,7 +31,7 @@ module.exports = router;
  * /events:
  *   post:
  *     summary: Create an event
- *     description: Only admins / moderators can upload events.
+ *     description: Only admins / moderators can create events.
  *     tags: [Events]
  *     security:
  *       - bearerAuth: []
@@ -179,7 +179,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/User'
+ *                $ref: '#/components/schemas/Event'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

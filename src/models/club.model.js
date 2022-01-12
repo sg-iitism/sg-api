@@ -13,6 +13,11 @@ const clubSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    division: {
+      type: String,
+      enum: ['mnc', 'snt'],
+      required: true,
+    },
     logoUrl: {
       type: String,
     },
@@ -46,11 +51,6 @@ const clubSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    division: {
-      type: String,
-      enum: ['mnc', 'snt'],
-      required: true,
-    },
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
@@ -68,6 +68,16 @@ const clubSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 clubSchema.plugin(toJSON);
+
+/**
+ * Check if name is taken
+ * @param {string} name - Name of club
+ * @returns {Promise<boolean>}
+ */
+clubSchema.statics.isNameTaken = async function (name) {
+  const club = await this.findOne({ name });
+  return !!club;
+};
 
 /**
  * @typedef Club

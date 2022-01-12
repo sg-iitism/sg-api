@@ -39,7 +39,7 @@ const updateUser = {
       //        .regex(/^.*@.*iitism.ac.in$/),
       password: Joi.string().custom(password),
       name: Joi.string(),
-      role: Joi.string().required().valid('user', 'admin', 'moderator'),
+      role: Joi.string().valid('user', 'admin', 'moderator'),
       moderatorClub: Joi.string(),
       moderatorFest: Joi.string(),
     })

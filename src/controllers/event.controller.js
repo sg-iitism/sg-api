@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
+const ApiError = require('../utils/ApiError');
 const { eventService } = require('../services');
 
 const createEvent = catchAsync(async (req, res) => {
@@ -15,6 +16,9 @@ const getEvents = catchAsync(async (req, res) => {
 
 const getEventDetails = catchAsync(async (req, res) => {
   const result = await eventService.getEventById(req.params.eventId);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Event not found');
+  }
   res.send(result);
 });
 
