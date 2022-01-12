@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User } = require('../models');
+const { User, Club, Fest } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -8,8 +8,21 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<User>}
  */
 const createUser = async (userBody) => {
-  if (await User.isEmailTaken(userBody.email)) {
+  const { email, moderatorClub, moderatorFest } = userBody;
+  if (await User.isEmailTaken(email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  if (moderatorClub) {
+    const doesClubExist = await Club.exists({ _id: moderatorClub });
+    if (!doesClubExist) {
+      throw new ApiError(httpStatus.BAD_REQUEST, `Club ${moderatorClub} not found`);
+    }
+  }
+  if (moderatorFest) {
+    const doesFestExist = await Fest.exists({ _id: moderatorFest });
+    if (!doesFestExist) {
+      throw new ApiError(httpStatus.BAD_REQUEST, `Fest ${moderatorFest} not found`);
+    }
   }
   return User.create(userBody);
 };
@@ -53,12 +66,25 @@ const getUserByEmail = async (email) => {
  * @returns {Promise<User>}
  */
 const updateUserById = async (userId, updateBody) => {
+  const { email, moderatorClub, moderatorFest } = updateBody;
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
-  if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
+  if (email && (await User.isEmailTaken(email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  if (moderatorClub) {
+    const doesClubExist = await Club.exists({ _id: moderatorClub });
+    if (!doesClubExist) {
+      throw new ApiError(httpStatus.BAD_REQUEST, `Club ${moderatorClub} not found`);
+    }
+  }
+  if (moderatorFest) {
+    const doesFestExist = await Fest.exists({ _id: moderatorFest });
+    if (!doesFestExist) {
+      throw new ApiError(httpStatus.BAD_REQUEST, `Fest ${moderatorFest} not found`);
+    }
   }
   Object.assign(user, updateBody);
   await user.save();

@@ -100,9 +100,93 @@ components:
         showCommonly:
           type: boolean
       example:
+        id: test-event-35c56ee7-87cd-4067-a4ed-f85aaf25a95d
         name: test event
         start: 2022-01-20T16:23:56.057Z
-        end: 2022-01-20T21:23:56.057Z        
+        end: 2022-01-20T21:23:56.057Z
+
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string        
+        position:
+          type: string
+        imageUrl:
+          type: string
+        mail:
+          type: string
+        linkedin:
+          type: string
+        facebook:
+          type: string                                                          
+        phone:
+          type: string
+      example:
+        name: Fake name
+        position: Coordinator
+        imageUrl: https://via.placeholder.com/350x150
+        mail: fake@gmail.com          
+
+    Club:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        division:
+          type: string
+          enum: [snt, mnc]
+        logoUrl:
+          type: string
+          format: uri
+        backgroundImageUrl:
+          type: string
+          format: uri
+        tagline:
+          type: string
+        about:
+          type: string
+        website:
+          type: string
+        mail:
+          type: string
+        facebook:
+          type: string
+        linkedin:
+          type: string
+        github:
+          type: string
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+      example:
+        id: cyber-labs
+        name: Cyber Labs
+        division: snt
+
+    Achievement:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        details:
+          type: string                      
+        imageUrl:
+          type: string          
+          format: uri
+        club:
+          type: string
+      example:
+        id: test-achievement-35c56ee7-87cd-4067-a4ed-f85aaf25a95d           
+        title: test achievement
+        details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        imageUrl: https://via.placeholder.com/350x150
+        club: cyber-labs
 
   responses:
     DuplicateEmail:

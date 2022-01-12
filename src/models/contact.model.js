@@ -36,11 +36,6 @@ const contactSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    updatedBy: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
-      required: true,
-    },
   },
   {
     timestamps: true,
