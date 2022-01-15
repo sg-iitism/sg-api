@@ -11,6 +11,8 @@ const createEvent = {
     website: Joi.string().uri(),
     festOrganizer: Joi.string(),
     clubOrganizers: Joi.array().items(Joi.string()),
+    createdBy: Joi.forbidden(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 
@@ -40,6 +42,8 @@ const updateEvent = {
     website: Joi.string().uri(),
     festOrganizer: Joi.string(),
     clubOrganizers: Joi.array().items(Joi.string()),
+    createdBy: Joi.forbidden(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 

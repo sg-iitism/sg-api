@@ -6,3 +6,5 @@ module.exports.imageService = require('./image.service');
 module.exports.eventService = require('./event.service');
 module.exports.clubService = require('./club.service');
 module.exports.achievementService = require('./achievement.service');
+module.exports.festService = require('./fest.service');
+module.exports.festArchiveService = require('./festArchive.service');

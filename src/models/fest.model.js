@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
-const festArchiveSchema = require('./festArchive.model').schema;
 
 const festSchema = mongoose.Schema(
   {
@@ -19,7 +18,6 @@ const festSchema = mongoose.Schema(
     subtitle: {
       type: String,
     },
-    archives: [festArchiveSchema],
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
@@ -37,6 +35,16 @@ const festSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 festSchema.plugin(toJSON);
+
+/**
+ * Check if name is taken
+ * @param {string} name - Name of fest
+ * @returns {Promise<boolean>}
+ */
+festSchema.statics.isNameTaken = async function (name) {
+  const fest = await this.findOne({ name });
+  return !!fest;
+};
 
 /**
  * @typedef Fest

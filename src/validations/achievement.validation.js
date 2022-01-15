@@ -6,6 +6,7 @@ const createAchievement = {
     details: Joi.string().required(),
     imageUrl: Joi.string().uri().required(),
     club: Joi.string().required(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 
@@ -24,6 +25,7 @@ const updateAchievement = {
     details: Joi.string(),
     imageUrl: Joi.string().uri(),
     club: Joi.string(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 

@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const { v4: uuidv4 } = require('uuid');
-const { Event, Fest } = require('../models');
+const { Event, FestArchive } = require('../models');
 const ApiError = require('../utils/ApiError');
 const convertToSlug = require('../utils/convertToSlug');
 
@@ -70,11 +70,13 @@ const getEventsByClubId = async (clubId) => {
  * @returns {Promise<Event>}
  */
 const getEventsByFestId = async (festId) => {
-  const fest = await Fest.findById(festId, { 'archives.year': 1, 'archives.start': 1, 'archives.end': 1 });
-  if (!fest.archives.length) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'No event found');
+  const festLatestYears = await FestArchive.find({ fest: festId }, { year: 1, start: 1, end: 1 })
+    .sort({ year: 'desc' })
+    .limit(1);
+  if (!festLatestYears.length) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No year found for this fest.');
   }
-  const latestFest = fest.archives[0];
+  const latestFest = festLatestYears[0];
   return Event.find({
     $and: [{ festOrganizer: festId }, { start: { $gte: latestFest.start } }, { end: { $lte: latestFest.end } }],
   }).sort({ end: 'desc' });
@@ -87,11 +89,11 @@ const getEventsByFestId = async (festId) => {
  * @returns {Promise<Event>}
  */
 const getEventsByFestIdAndYear = async (festId, year) => {
-  const fest = await Fest.findById(festId, { 'archives.year': 1, 'archives.start': 1, 'archives.end': 1 });
-  const selectedArchive = fest.filter((archive) => archive.year === year)[0];
-  if (!selectedArchive) {
+  const selectedArchives = await FestArchive.find({ fest: festId, year: Number(year) }, { start: 1, end: 1 }).limit(1);
+  if (!selectedArchives) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'The archive for this year is not available.');
   }
+  const selectedArchive = selectedArchives[0];
   return Event.find({
     $and: [{ festOrganizer: festId }, { start: { $gte: selectedArchive.start } }, { end: { $lte: selectedArchive.end } }],
   }).sort({ end: 'desc' });

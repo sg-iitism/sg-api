@@ -42,6 +42,7 @@ const updateUser = {
       role: Joi.string().valid('user', 'admin', 'moderator'),
       moderatorClub: Joi.string(),
       moderatorFest: Joi.string(),
+      isEmailVerified: Joi.forbidden(),
     })
     .min(1),
 };

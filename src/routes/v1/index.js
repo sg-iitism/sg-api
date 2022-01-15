@@ -5,6 +5,7 @@ const imageRoute = require('./image.route');
 const eventRoute = require('./event.route');
 const clubRoute = require('./club.route');
 const achievementRoute = require('./achievement.route');
+const festRoute = require('./fest.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -34,6 +35,10 @@ const defaultRoutes = [
   {
     path: '/achievements',
     route: achievementRoute,
+  },
+  {
+    path: '/fests',
+    route: festRoute,
   },
   // TODO: remove later
   {

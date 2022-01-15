@@ -34,7 +34,7 @@ module.exports = router;
  * @swagger
  * /clubs:
  *   post:
- *     summary: Create an club
+ *     summary: Create a club
  *     description: Only admins can create clubs.
  *     tags: [Clubs]
  *     security:
@@ -89,6 +89,8 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/Club'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateClub'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -118,7 +120,7 @@ module.exports = router;
  * @swagger
  * /clubs/{clubId}:
  *   get:
- *     summary: Get details of an club
+ *     summary: Get details of a club
  *     tags: [Clubs]
  *     parameters:
  *       - in: path
@@ -138,7 +140,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update an club
+ *     summary: Update a club
  *     description: Admin can update any club but moderator can update only those clubs that are moderated by them.
  *     tags: [Clubs]
  *     security:
@@ -231,8 +233,8 @@ module.exports = router;
  * @swagger
  * /clubs/{clubId}/events:
  *   get:
- *     summary: Get events of an club
- *     tags: [Clubs]
+ *     summary: Get events of a club
+ *     tags: [Clubs, Events]
  *     parameters:
  *       - in: path
  *         name: clubId
@@ -255,8 +257,8 @@ module.exports = router;
  * @swagger
  * /clubs/{clubId}/achievements:
  *   get:
- *     summary: Get achievements of an club
- *     tags: [Clubs]
+ *     summary: Get achievements of a club
+ *     tags: [Clubs, Achievements]
  *     parameters:
  *       - in: path
  *         name: clubId
