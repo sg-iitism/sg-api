@@ -24,6 +24,8 @@ const createClub = {
     facebook: Joi.string(),
     linkedin: Joi.string(),
     github: Joi.string(),
+    createdBy: Joi.forbidden(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 
@@ -41,13 +43,13 @@ const getClubDetails = {
 
 const getClubEvents = {
   params: Joi.object().keys({
-    clubId: Joi.string(),
+    clubId: Joi.string().required(),
   }),
 };
 
 const getClubAchievements = {
   params: Joi.object().keys({
-    clubId: Joi.string(),
+    clubId: Joi.string().required(),
   }),
 };
 
@@ -78,6 +80,8 @@ const updateClub = {
     facebook: Joi.string(),
     linkedin: Joi.string(),
     github: Joi.string(),
+    createdBy: Joi.forbidden(),
+    updatedBy: Joi.forbidden(),
   }),
 };
 

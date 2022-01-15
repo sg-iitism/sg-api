@@ -4,6 +4,7 @@ const { objectId } = require('./custom.validation');
 const createImage = {
   body: Joi.object().keys({
     title: Joi.string().required(),
+    createdBy: Joi.forbidden(),
   }),
 };
 

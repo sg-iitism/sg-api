@@ -65,7 +65,7 @@ const getUserByEmail = async (email) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateUserById = async (userId, updateBody) => {
+const updateUserById = async (isAdmin, userId, updateBody) => {
   const { email, moderatorClub, moderatorFest } = updateBody;
   const user = await getUserById(userId);
   if (!user) {
@@ -85,6 +85,15 @@ const updateUserById = async (userId, updateBody) => {
     if (!doesFestExist) {
       throw new ApiError(httpStatus.BAD_REQUEST, `Fest ${moderatorFest} not found`);
     }
+  }
+  if (!isAdmin && (updateBody.email || updateBody.role || updateBody.moderatorClub || updateBody.moderatorFest)) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      `Non-admins can't update their email, role, club or fest. Please request an admin to do it for you.`
+    );
+  }
+  if (email && email !== user.email) {
+    user.isEmailVerified = false;
   }
   Object.assign(user, updateBody);
   await user.save();

@@ -4,6 +4,11 @@ const contactSchema = require('./contact.model').schema;
 
 const festArchiveSchema = mongoose.Schema(
   {
+    fest: {
+      type: String,
+      ref: 'Fest',
+      required: true,
+    },
     year: {
       type: Number,
       required: true,
