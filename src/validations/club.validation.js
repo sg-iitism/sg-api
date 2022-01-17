@@ -9,15 +9,17 @@ const createClub = {
     tagline: Joi.string(),
     about: Joi.string(),
     contacts: Joi.array().items(
-      Joi.object().keys({
-        name: Joi.string().required,
-        position: Joi.string().required,
-        imageUrl: Joi.string().uri().required,
-        mail: Joi.string().required,
-        linkedin: Joi.string().uri(),
-        facebook: Joi.string().uri(),
-        phone: Joi.string(),
-      })
+      Joi.object()
+        .keys({
+          name: Joi.string().required(),
+          position: Joi.string().required(),
+          imageUrl: Joi.string().uri().required(),
+          mail: Joi.string(),
+          linkedin: Joi.string().uri(),
+          facebook: Joi.string().uri(),
+          phone: Joi.string().pattern(/^[0-9]*$/),
+        })
+        .or('linkedin', 'facebook', 'mail', 'phone')
     ),
     website: Joi.string(),
     mail: Joi.string(),
@@ -65,15 +67,17 @@ const updateClub = {
     tagline: Joi.string(),
     about: Joi.string(),
     contacts: Joi.array().items(
-      Joi.object().keys({
-        name: Joi.string().required,
-        position: Joi.string().required,
-        imageUrl: Joi.string().uri().required,
-        mail: Joi.string().required,
-        linkedin: Joi.string().uri(),
-        facebook: Joi.string().uri(),
-        phone: Joi.string(),
-      })
+      Joi.object()
+        .keys({
+          name: Joi.string().required(),
+          position: Joi.string().required(),
+          imageUrl: Joi.string().uri().required(),
+          mail: Joi.string(),
+          linkedin: Joi.string().uri(),
+          facebook: Joi.string().uri(),
+          phone: Joi.string().pattern(/^[0-9]*$/),
+        })
+        .or('linkedin', 'facebook', 'mail', 'phone')
     ),
     website: Joi.string(),
     mail: Joi.string(),

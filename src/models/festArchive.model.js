@@ -61,6 +61,9 @@ const festArchiveSchema = mongoose.Schema(
   }
 );
 
+// combination of fest and year should be unique
+festArchiveSchema.index({ fest: 1, year: 1 }, { unique: true });
+
 // add plugin that converts mongoose to json
 festArchiveSchema.plugin(toJSON);
 

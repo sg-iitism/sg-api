@@ -90,7 +90,7 @@ const getEventsByFestId = async (festId) => {
  */
 const getEventsByFestIdAndYear = async (festId, year) => {
   const selectedArchives = await FestArchive.find({ fest: festId, year: Number(year) }, { start: 1, end: 1 }).limit(1);
-  if (!selectedArchives) {
+  if (!selectedArchives.length) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'The archive for this year is not available.');
   }
   const selectedArchive = selectedArchives[0];

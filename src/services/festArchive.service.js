@@ -15,7 +15,7 @@ const addFestYear = async (festId, body, user) => {
   if (!doesFestExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, `Fest ${festId} not found`);
   }
-  const doesFestArchiveAlreadyExist = await Fest.exists({ fest: festId, year: Number(year) });
+  const doesFestArchiveAlreadyExist = await FestArchive.exists({ fest: festId, year: +year });
   if (doesFestArchiveAlreadyExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, `Sorry, the year ${year} is already existing for the fest ${festId}.`);
   }
@@ -56,7 +56,7 @@ const getFestYears = async (festId) => {
 const getFestDetailsOfLatestYear = async (festId) => {
   const festArchives = await FestArchive.find({ fest: festId }).sort({ year: 'desc' }).limit(1);
   if (!festArchives.length) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'No archive found for this fest');
+    throw new ApiError(httpStatus.NOT_FOUND, `No archive found for the fest '${festId}'`);
   }
   return festArchives[0];
 };
@@ -70,7 +70,7 @@ const getFestDetailsOfLatestYear = async (festId) => {
 const getFestDetailsByYear = async (festId, year) => {
   const festArchives = await FestArchive.find({ fest: festId, year: Number(year) });
   if (!festArchives.length) {
-    throw new ApiError(httpStatus.NOT_FOUND, `Archive for the year ${year} is not available for this fest`);
+    throw new ApiError(httpStatus.NOT_FOUND, `Archive for the year ${year} is not available for fest '${festId}'`);
   }
   return festArchives[0];
 };

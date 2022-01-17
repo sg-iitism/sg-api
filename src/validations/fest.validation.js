@@ -26,15 +26,17 @@ const addFestYear = {
     facebook: Joi.string(),
     androidApp: Joi.string(),
     coreTeam: Joi.array().items(
-      Joi.object().keys({
-        name: Joi.string().required,
-        position: Joi.string().required,
-        imageUrl: Joi.string().uri().required,
-        mail: Joi.string().required,
-        linkedin: Joi.string().uri(),
-        facebook: Joi.string().uri(),
-        phone: Joi.string(),
-      })
+      Joi.object()
+        .keys({
+          name: Joi.string().required(),
+          position: Joi.string().required(),
+          imageUrl: Joi.string().uri().required(),
+          mail: Joi.string(),
+          linkedin: Joi.string().uri(),
+          facebook: Joi.string().uri(),
+          phone: Joi.string().pattern(/^[0-9]*$/),
+        })
+        .or('linkedin', 'facebook', 'mail', 'phone')
     ),
     createdBy: Joi.forbidden(),
     updatedBy: Joi.forbidden(),
@@ -111,15 +113,17 @@ const updateFestArchiveByYear = {
     facebook: Joi.string(),
     androidApp: Joi.string(),
     coreTeam: Joi.array().items(
-      Joi.object().keys({
-        name: Joi.string().required,
-        position: Joi.string().required,
-        imageUrl: Joi.string().uri().required,
-        mail: Joi.string().required,
-        linkedin: Joi.string().uri(),
-        facebook: Joi.string().uri(),
-        phone: Joi.string(),
-      })
+      Joi.object()
+        .keys({
+          name: Joi.string().required(),
+          position: Joi.string().required(),
+          imageUrl: Joi.string().uri().required(),
+          mail: Joi.string(),
+          linkedin: Joi.string().uri(),
+          facebook: Joi.string().uri(),
+          phone: Joi.string().pattern(/^[0-9]*$/),
+        })
+        .or('linkedin', 'facebook', 'mail', 'phone')
     ),
     fest: Joi.forbidden(),
     createdBy: Joi.forbidden(),

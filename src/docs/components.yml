@@ -290,7 +290,7 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             code: 400
-            message: Sorry, the year 2022 is already existing for the fest concetoo.                                    
+            message: Sorry, the year 2022 is already existing for the fest concetto.                                    
     Unauthorized:
       description: Unauthorized
       content:

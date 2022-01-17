@@ -22,7 +22,6 @@ const contactSchema = mongoose.Schema(
     mail: {
       type: String,
       trim: true,
-      required: true,
     },
     linkedin: {
       type: String,
