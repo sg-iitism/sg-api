@@ -194,7 +194,18 @@ module.exports = router;
  *                   $ref: '#/components/schemas/Contact'
  *             example:
  *               name: Cyber Labs
+ *               tagline: Official programming club
  *               division: snt
+ *               about: a sample about text
+ *               contacts:
+ *                 - name: XYZ ABC
+ *                   position: faculty advisor
+ *                   imageUrl: https://via.placeholder.com/350x150
+ *                   linkedin: https://www.linkedin.com/
+ *                 - name: XYZ ABC
+ *                   position: student coordinator
+ *                   imageUrl: https://via.placeholder.com/350x150
+ *                   facebook: https://www.facebook.com/
  *     responses:
  *       "200":
  *         description: OK

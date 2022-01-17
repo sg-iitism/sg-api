@@ -8,3 +8,4 @@ module.exports.clubService = require('./club.service');
 module.exports.achievementService = require('./achievement.service');
 module.exports.festService = require('./fest.service');
 module.exports.festArchiveService = require('./festArchive.service');
+module.exports.senateService = require('./senate.service');

@@ -173,6 +173,13 @@ module.exports = router;
  *               name: Test event
  *               start: 2022-01-20T16:23:56.057Z
  *               end: 2022-01-20T21:23:56.057Z
+ *               imageUrl: https://via.placeholder.com/350x150
+ *               festOrganizer: srijan
+ *               showCommonly: false
+ *               website: https://iitism.ac.in
+ *               clubOrganizers:
+ *                 - roboism
+ *                 - cyber-labs
  *     responses:
  *       "200":
  *         description: OK

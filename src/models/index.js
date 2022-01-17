@@ -7,3 +7,4 @@ module.exports.Contact = require('./contact.model');
 module.exports.Event = require('./event.model');
 module.exports.Fest = require('./fest.model');
 module.exports.FestArchive = require('./festArchive.model');
+module.exports.Senate = require('./senate.model');

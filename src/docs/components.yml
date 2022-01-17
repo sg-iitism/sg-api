@@ -258,6 +258,30 @@ components:
       example:
         year: 2022
 
+    Senate:
+      type: object
+      properties:
+        id:
+          type: string
+        startYear:
+          type: number
+        endYear:
+          type: number
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'          
+
+    Tenure:
+      type: object
+      properties:
+        id:
+          type: string
+        startYear:
+          type: string
+        endYear:
+          type: string          
+
   responses:
     DuplicateEmail:
       description: Email already taken
@@ -294,7 +318,16 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             code: 400
-            message: Sorry, the year 2022 is already existing for the fest concetto.                                    
+            message: Sorry, the year 2022 is already existing for the fest concetto.
+    DuplicateSenate:
+      description: Senate with the given tenure overlaps with an existing senate tenure
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Sorry, there is already a senate with a tenure in between 2021 and 2022.                                                
     Unauthorized:
       description: Unauthorized
       content:

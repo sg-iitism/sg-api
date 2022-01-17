@@ -165,6 +165,8 @@ module.exports = router;
  *                 type: string
  *             example:
  *               name: Concetto
+ *               logoUrl: https://via.placeholder.com/350x150
+ *               subtitle: Official Techno-Management Fest
  *     responses:
  *       "200":
  *         description: OK
@@ -406,6 +408,18 @@ module.exports = router;
  *             example:
  *               start: 2022-01-20T16:23:56.057Z
  *               end: 2022-01-20T21:23:56.057Z
+ *               tagline: To the moon and back
+ *               about: This is a sample about text
+ *               participants: This is a sample description about number of participants
+ *               coreTeam:
+ *                 - name: XYZ ABC
+ *                   position: faculty advisor
+ *                   imageUrl: https://via.placeholder.com/350x150
+ *                   linkedin: https://www.linkedin.com/
+ *                 - name: XYZ ABC
+ *                   position: student coordinator
+ *                   imageUrl: https://via.placeholder.com/350x150
+ *                   facebook: https://www.facebook.com/
  *     responses:
  *       "200":
  *         description: OK
