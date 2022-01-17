@@ -25,6 +25,7 @@ const addFestYear = {
     mail: Joi.string(),
     facebook: Joi.string(),
     androidApp: Joi.string(),
+    instagram: Joi.string(),
     coreTeam: Joi.array().items(
       Joi.object()
         .keys({
@@ -112,6 +113,7 @@ const updateFestArchiveByYear = {
     mail: Joi.string(),
     facebook: Joi.string(),
     androidApp: Joi.string(),
+    instagram: Joi.string(),
     coreTeam: Joi.array().items(
       Joi.object()
         .keys({

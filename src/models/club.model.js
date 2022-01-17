@@ -47,6 +47,10 @@ const clubSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    instagram: {
+      type: String,
+      trim: true,
+    },
     github: {
       type: String,
       trim: true,

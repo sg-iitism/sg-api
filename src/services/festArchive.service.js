@@ -10,7 +10,7 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<FestArchive>}
  */
 const addFestYear = async (festId, body, user) => {
-  const { year, coreTeam, start, end, tagline, participants, about, website, mail, facebook, androidApp } = body;
+  const { year, coreTeam, start, end, tagline, participants, about, website, mail, facebook, androidApp, instagram } = body;
   const doesFestExist = await Fest.exists({ _id: festId });
   if (!doesFestExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, `Fest ${festId} not found`);
@@ -29,6 +29,7 @@ const addFestYear = async (festId, body, user) => {
     ...(website && { website }),
     ...(mail && { mail }),
     ...(facebook && { facebook }),
+    ...(instagram && { instagram }),
     ...(androidApp && { androidApp }),
     year,
     fest: festId,

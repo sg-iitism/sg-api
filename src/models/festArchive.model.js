@@ -42,6 +42,10 @@ const festArchiveSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    instagram: {
+      type: String,
+      trim: true,
+    },
     androidApp: {
       type: String,
       trim: true,

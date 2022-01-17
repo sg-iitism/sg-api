@@ -22,6 +22,7 @@ const createClub = async (body, user) => {
     facebook,
     linkedin,
     github,
+    instagram,
   } = body;
   if (await Club.isNameTaken(name)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Sorry, there is already a club with this name.');
@@ -38,6 +39,7 @@ const createClub = async (body, user) => {
     ...(facebook && { facebook }),
     ...(linkedin && { linkedin }),
     ...(github && { github }),
+    ...(instagram && { instagram }),
     _id,
     name,
     division,

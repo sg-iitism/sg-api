@@ -158,6 +158,8 @@ components:
           type: string
         github:
           type: string
+        instagram:
+          type: string          
         contacts:
           type: array
           items:
@@ -239,6 +241,8 @@ components:
           type: string
         androidApp:
           type: string
+        instagram:
+          type: string          
       example:
         id: 5ebac534954b54139806c112
         fest: Concetto

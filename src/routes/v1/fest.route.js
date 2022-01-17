@@ -278,6 +278,8 @@ module.exports = router;
  *                 type: string
  *               facebook:
  *                 type: string
+ *               instagram:
+ *                 type: string
  *               androidApp:
  *                 type: string
  *             example:
@@ -396,6 +398,8 @@ module.exports = router;
  *               mail:
  *                 type: string
  *               facebook:
+ *                 type: string
+ *               instagram:
  *                 type: string
  *               androidApp:
  *                 type: string

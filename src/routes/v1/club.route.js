@@ -70,6 +70,8 @@ module.exports = router;
  *                 type: string
  *               facebook:
  *                 type: string
+ *               instagram:
+ *                 type: string
  *               linkedin:
  *                 type: string
  *               github:
@@ -179,6 +181,8 @@ module.exports = router;
  *               mail:
  *                 type: string
  *               facebook:
+ *                 type: string
+ *               instagram:
  *                 type: string
  *               linkedin:
  *                 type: string
