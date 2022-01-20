@@ -23,8 +23,8 @@ const getEventDetails = catchAsync(async (req, res) => {
 });
 
 const updateEvent = catchAsync(async (req, res) => {
-  await eventService.updateEventById(req.params.eventId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const event = await eventService.updateEventById(req.params.eventId, req.body, req.user);
+  res.send(event);
 });
 
 const deleteEvent = catchAsync(async (req, res) => {

@@ -31,8 +31,8 @@ const getSenateTenures = catchAsync(async (req, res) => {
 });
 
 const updateSenate = catchAsync(async (req, res) => {
-  await senateService.updateSenateById(req.params.senateId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const senate = await senateService.updateSenateById(req.params.senateId, req.body, req.user);
+  res.send(senate);
 });
 
 const deleteSenate = catchAsync(async (req, res) => {

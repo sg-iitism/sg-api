@@ -33,8 +33,8 @@ const getClubAchievements = catchAsync(async (req, res) => {
 });
 
 const updateClub = catchAsync(async (req, res) => {
-  await clubService.updateClubById(req.params.clubId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const club = await clubService.updateClubById(req.params.clubId, req.body, req.user);
+  res.send(club);
 });
 
 const deleteClub = catchAsync(async (req, res) => {

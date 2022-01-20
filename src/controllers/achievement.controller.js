@@ -17,8 +17,8 @@ const getAchievementDetails = catchAsync(async (req, res) => {
 });
 
 const updateAchievement = catchAsync(async (req, res) => {
-  await achievementService.updateAchievementById(req.params.achievementId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const achievement = await achievementService.updateAchievementById(req.params.achievementId, req.body, req.user);
+  res.send(achievement);
 });
 
 const deleteAchievement = catchAsync(async (req, res) => {

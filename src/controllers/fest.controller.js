@@ -48,13 +48,13 @@ const getEventsByFestIdAndYear = catchAsync(async (req, res) => {
 });
 
 const updateFest = catchAsync(async (req, res) => {
-  await festService.updateFestById(req.params.festId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const fest = await festService.updateFestById(req.params.festId, req.body, req.user);
+  res.send(fest);
 });
 
 const updateFestArchiveByYear = catchAsync(async (req, res) => {
-  await festArchiveService.updateFestArchiveByYear(req.params.festId, req.params.year, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const festArchive = await festArchiveService.updateFestArchiveByYear(req.params.festId, req.params.year, req.body, req.user);
+  res.send(festArchive);
 });
 
 const deleteFestArchiveByYear = catchAsync(async (req, res) => {
