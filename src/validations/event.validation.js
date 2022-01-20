@@ -4,7 +4,7 @@ const createEvent = {
   body: Joi.object().keys({
     name: Joi.string().required(),
     start: Joi.date().required(),
-    end: Joi.date().required(),
+    end: Joi.date().required().min(Joi.ref('start')),
     details: Joi.string(),
     showCommonly: Joi.boolean(),
     imageUrl: Joi.string().uri(),

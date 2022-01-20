@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createSenate = {
   body: Joi.object().keys({
     startYear: Joi.number().min(1900).max(3000),
-    endYear: Joi.number().min(1900).max(3000),
+    endYear: Joi.number().min(Joi.ref('startYear')).max(3000),
     members: Joi.array().items(
       Joi.object()
         .keys({

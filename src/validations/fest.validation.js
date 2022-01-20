@@ -17,7 +17,7 @@ const addFestYear = {
   body: Joi.object().keys({
     year: Joi.number().min(1900).max(3000).required(),
     start: Joi.date().required(),
-    end: Joi.date().required(),
+    end: Joi.date().required().min(Joi.ref('start')),
     tagline: Joi.string(),
     participants: Joi.string(),
     about: Joi.string(),

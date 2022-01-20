@@ -37,12 +37,15 @@ const sendResetPasswordEmail = async (to, token) => {
 
   To reset your password, click on this link: ${resetPasswordUrl}
 
+  This link will only be valid for ${config.jwt.resetPasswordExpirationMinutes} minutes.
+
   If you did not request any password resets, then ignore this email.
   
   Student Gymkhana
   IIT(ISM) Dhanbad`;
   const html = `Dear user,<br/><br/>
   To reset your password, click <a href="${resetPasswordUrl}">here</a><br/><br/>
+  This link will only be valid for ${config.jwt.resetPasswordExpirationMinutes} minutes.<br/><br/>
   <i>If you did not request any password resets, then ignore this email.</i><br/><br/>
   Student Gymkhana<br/>
   IIT(ISM) Dhanbad<br/>`;
@@ -64,12 +67,15 @@ const sendVerificationEmail = async (to, token) => {
 
   To verify your email, click on this link: ${verificationEmailUrl}
 
+  This link will only be valid for ${config.jwt.verifyEmailExpirationMinutes} minutes.
+
   If you did not create an account, then ignore this email.
   
   Student Gymkhana
   IIT(ISM) Dhanbad`;
   const html = `Dear user,<br/><br/>
   To verify your email, click <a href="${verificationEmailUrl}">here</a><br/><br/>
+  This link will only be valid for ${config.jwt.verifyEmailExpirationMinutes} minutes.<br/><br/>  
   <i>If you did not create an account, then ignore this email.</i><br/><br/> 
   Student Gymkhana<br/>
   IIT(ISM) Dhanbad<br/>`;

@@ -71,6 +71,14 @@ festArchiveSchema.index({ fest: 1, year: 1 }, { unique: true });
 // add plugin that converts mongoose to json
 festArchiveSchema.plugin(toJSON);
 
+// validate start and end time
+festArchiveSchema.pre('validate', function (next) {
+  if (this.start > this.end) {
+    next(new Error('End time must be greater than the start time.'));
+  }
+  next();
+});
+
 /**
  * @typedef FestArchive
  */

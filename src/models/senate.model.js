@@ -53,6 +53,14 @@ senateSchema.statics.doesTenureExist = async function (_startYear, _endYear) {
   return doesExist;
 };
 
+// validate start and end year
+senateSchema.pre('validate', function (next) {
+  if (this.startYear > this.endYear) {
+    next(new Error('End year must be greater than or equal to the start year.'));
+  }
+  next();
+});
+
 /**
  * @typedef Senate
  */
