@@ -45,6 +45,8 @@ const sendResetPasswordEmail = async (to, token) => {
   IIT(ISM) Dhanbad`;
   const html = `Dear user,<br/><br/>
   To reset your password, click <a href="${resetPasswordUrl}">here</a><br/><br/>
+  If the above link doesn't work, copy and paste this URL in your browser:<br/>  
+  ${resetPasswordUrl}<br/><br/>  
   This link will only be valid for ${config.jwt.resetPasswordExpirationMinutes} minutes.<br/><br/>
   <i>If you did not request any password resets, then ignore this email.</i><br/><br/>
   Student Gymkhana<br/>
@@ -75,6 +77,8 @@ const sendVerificationEmail = async (to, token) => {
   IIT(ISM) Dhanbad`;
   const html = `Dear user,<br/><br/>
   To verify your email, click <a href="${verificationEmailUrl}">here</a><br/><br/>
+  If the above link doesn't work, copy and paste this URL in your browser:<br/>  
+  ${verificationEmailUrl}<br/><br/>  
   This link will only be valid for ${config.jwt.verifyEmailExpirationMinutes} minutes.<br/><br/>  
   <i>If you did not create an account, then ignore this email.</i><br/><br/> 
   Student Gymkhana<br/>
@@ -110,6 +114,8 @@ const sendCredentialsEmail = async (to, password) => {
   const html = `Dear user,<br/><br/>
   An account with this email has been created for you. Please login <a href="${loginPageUrl}">here</a> with the below credentials:<br/><br/>
   <b>Password:</b> ${password}<br/><br/>
+  If the above link doesn't work, copy and paste this URL in your browser:<br/>  
+  ${loginPageUrl}<br/><br/>  
   <b>After logging in, please verify your email ID and then change this password.</b><br/><br/>
   <i>If you did not create an account, then ignore this email.</i><br/><br/>
   Student Gymkhana<br/>
