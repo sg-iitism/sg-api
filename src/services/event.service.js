@@ -10,7 +10,7 @@ const convertToSlug = require('../utils/convertToSlug');
  * @returns {Promise<Event>}
  */
 const createEvent = async (body, user) => {
-  const { name, start, end, showCommonly, imageUrl, website, festOrganizer, clubOrganizers } = body;
+  const { name, start, end, showCommonly, imageUrl, website, festOrganizer, clubOrganizers, details } = body;
   if (
     user.role !== 'admin' &&
     (user.role !== ' moderator' || (festOrganizer !== user.moderatorFest && !clubOrganizers.includes(user.moderatorClub)))
@@ -24,6 +24,7 @@ const createEvent = async (body, user) => {
     ...(website && { website }),
     ...(festOrganizer && { festOrganizer }),
     ...(clubOrganizers && { clubOrganizers }),
+    ...(details && { details }),
     _id,
     name,
     start,

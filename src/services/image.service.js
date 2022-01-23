@@ -48,7 +48,7 @@ const deleteImageById = async (imageId, user) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Image not found');
   }
 
-  if (user.role !== 'admin' && user.id !== image.createdBy) {
+  if (user.role !== 'admin' && user.id !== image.createdBy.toString()) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
 

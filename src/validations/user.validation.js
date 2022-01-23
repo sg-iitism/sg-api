@@ -8,8 +8,8 @@ const createUser = {
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
     role: Joi.string().required().valid('user', 'admin', 'moderator'),
-    moderatorClub: Joi.string(),
-    moderatorFest: Joi.string(),
+    moderatorClub: Joi.string().allow('', null),
+    moderatorFest: Joi.string().allow('', null),
   }),
 };
 
@@ -40,8 +40,8 @@ const updateUser = {
       password: Joi.string().custom(password),
       name: Joi.string(),
       role: Joi.string().valid('user', 'admin', 'moderator'),
-      moderatorClub: Joi.string(),
-      moderatorFest: Joi.string(),
+      moderatorClub: Joi.string().allow('', null),
+      moderatorFest: Joi.string().allow('', null),
       isEmailVerified: Joi.forbidden(),
     })
     .min(1),
