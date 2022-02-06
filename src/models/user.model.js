@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      // match: /^.*@.*iitism.ac.in$/,
+      match: /^.*@.*iitism.ac.in$/,
       required: true,
       unique: true,
       trim: true,
