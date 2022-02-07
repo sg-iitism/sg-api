@@ -11,7 +11,7 @@ const convertToSlug = require('../utils/convertToSlug');
  */
 const createAchievement = async (body, user) => {
   const { title, details, imageUrl, club } = body;
-  if (user.role !== 'admin' && (user.role !== ' moderator' || user.moderatorClub !== club)) {
+  if (user.role !== 'admin' && (user.role !== 'moderator' || user.moderatorClub !== club)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
   const doesClubExist = await Club.exists({ _id: club });
@@ -65,7 +65,7 @@ const updateAchievementById = async (achievementId, updateBody, user) => {
 
   if (
     user.role !== 'admin' &&
-    (user.role !== ' moderator' ||
+    (user.role !== 'moderator' ||
       (achievement.festOrganizer !== user.moderatorFest && !achievement.clubOrganizers.includes(user.moderatorClub)))
   ) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
@@ -94,7 +94,7 @@ const deleteAchievementById = async (achievementId, user) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Achievement not found');
   }
 
-  if (user.role !== 'admin' && (user.role !== ' moderator' || user.moderatorClub !== achievement.club)) {
+  if (user.role !== 'admin' && (user.role !== 'moderator' || user.moderatorClub !== achievement.club)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
 

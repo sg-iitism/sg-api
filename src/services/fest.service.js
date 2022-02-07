@@ -54,7 +54,7 @@ const updateFestById = async (festId, updateBody, user) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Fest not found');
   }
 
-  if (user.role !== 'admin' && (user.role !== ' moderator' || user.moderatorFest !== festId)) {
+  if (user.role !== 'admin' && (user.role !== 'moderator' || user.moderatorFest !== festId)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
 

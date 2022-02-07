@@ -82,7 +82,7 @@ const updateClubById = async (clubId, updateBody, user) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Club not found');
   }
 
-  if (user.role !== 'admin' && (user.role !== ' moderator' || user.moderatorClub !== clubId)) {
+  if (user.role !== 'admin' && (user.role !== 'moderator' || user.moderatorClub !== clubId)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
 

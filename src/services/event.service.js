@@ -13,7 +13,7 @@ const createEvent = async (body, user) => {
   const { name, start, end, showCommonly, imageUrl, website, festOrganizer, clubOrganizers, details } = body;
   if (
     user.role !== 'admin' &&
-    (user.role !== ' moderator' || (festOrganizer !== user.moderatorFest && !clubOrganizers.includes(user.moderatorClub)))
+    (user.role !== 'moderator' || (festOrganizer !== user.moderatorFest && !clubOrganizers.includes(user.moderatorClub)))
   ) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
@@ -114,7 +114,7 @@ const updateEventById = async (eventId, updateBody, user) => {
 
   if (
     user.role !== 'admin' &&
-    (user.role !== ' moderator' ||
+    (user.role !== 'moderator' ||
       (event.festOrganizer !== user.moderatorFest && !event.clubOrganizers.includes(user.moderatorClub)))
   ) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
@@ -138,7 +138,7 @@ const deleteEventById = async (eventId, user) => {
 
   if (
     user.role !== 'admin' &&
-    (user.role !== ' moderator' ||
+    (user.role !== 'moderator' ||
       (event.festOrganizer !== user.moderatorFest && !event.clubOrganizers.includes(user.moderatorClub)))
   ) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');

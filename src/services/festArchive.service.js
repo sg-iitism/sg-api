@@ -86,7 +86,7 @@ const getFestDetailsByYear = async (festId, year) => {
 const updateFestArchiveByYear = async (festId, year, updateBody, user) => {
   const festArchive = await getFestDetailsByYear(festId, year);
 
-  if (user.role !== 'admin' && (user.role !== ' moderator' || user.moderatorFest !== festId)) {
+  if (user.role !== 'admin' && (user.role !== 'moderator' || user.moderatorFest !== festId)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
 
