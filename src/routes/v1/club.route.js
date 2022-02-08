@@ -76,6 +76,8 @@ module.exports = router;
  *                 type: string
  *               github:
  *                 type: string
+ *               youtube:
+ *                 type: string
  *               contacts:
  *                 type: array
  *                 items:
@@ -187,6 +189,8 @@ module.exports = router;
  *               linkedin:
  *                 type: string
  *               github:
+ *                 type: string
+ *               youtube:
  *                 type: string
  *               contacts:
  *                 type: array

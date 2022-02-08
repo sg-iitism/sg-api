@@ -158,6 +158,8 @@ components:
           type: string
         github:
           type: string
+        youtube:
+          type: string          
         instagram:
           type: string          
         contacts:

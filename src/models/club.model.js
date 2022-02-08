@@ -55,6 +55,10 @@ const clubSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    youtube: {
+      type: String,
+      trim: true,
+    },
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',

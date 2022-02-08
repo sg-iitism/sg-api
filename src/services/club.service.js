@@ -22,6 +22,7 @@ const createClub = async (body, user) => {
     facebook,
     linkedin,
     github,
+    youtube,
     instagram,
   } = body;
   if (await Club.isNameTaken(name)) {
@@ -39,6 +40,7 @@ const createClub = async (body, user) => {
     ...(facebook && { facebook }),
     ...(linkedin && { linkedin }),
     ...(github && { github }),
+    ...(youtube && { youtube }),
     ...(instagram && { instagram }),
     _id,
     name,
