@@ -19,6 +19,15 @@ router
   .patch(auth('manageSenate'), validate(senateValidation.updateSenate), senateController.updateSenate)
   .delete(auth('manageSenate'), validate(senateValidation.deleteSenate), senateController.deleteSenate);
 
+router
+  .route('/:senateId/other-members')
+  .post(auth('manageSenate'), validate(senateValidation.addOtherMember), senateController.addOtherMember);
+
+router
+  .route('/:senateId/other-members/:otherMemberId')
+  .patch(auth('manageSenate'), validate(senateValidation.updateOtherMember), senateController.updateOtherMember)
+  .delete(auth('manageSenate'), validate(senateValidation.deleteOtherMember), senateController.deleteOtherMember);
+
 module.exports = router;
 
 /**
@@ -55,6 +64,10 @@ module.exports = router;
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/Contact'
+ *               otherMembers:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/OtherMember'
  *             example:
  *               startYear: 2021
  *               endYear: 2022
@@ -151,16 +164,27 @@ module.exports = router;
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/Contact'
+ *               otherMembers:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/OtherMember'
  *             example:
  *               members:
  *                 - name: XYZ ABC
  *                   position: president
+ *                   branch: B.Tech Mech
  *                   imageUrl: https://via.placeholder.com/350x150
  *                   facebook: https://www.facebook.com/ashish.cv.12d
  *                 - name: XYZ ABC
  *                   position: chairperson
+ *                   branch: B.Tech CSE
  *                   imageUrl: https://via.placeholder.com/350x150
  *                   facebook: https://www.facebook.com/balatejaswi.kedasu
+ *               otherMembers:
+ *                 - name: XYZ ABC
+ *                   branch: B.Tech CSE
+ *                 - name: XYZ ABC
+ *                   branch: B.Tech ECE
  *     responses:
  *       "200":
  *         description: OK
@@ -188,6 +212,126 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: Senate id
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /senate/{senateId}/other-members:
+ *   post:
+ *     summary: Add an other member
+ *     description: Only admins can add othe members.
+ *     tags: [Senate]
+ *     parameters:
+ *       - in: path
+ *         name: senateId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Senate id
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - branch
+ *             properties:
+ *               name:
+ *                 type: string
+ *               branch:
+ *                 type: string
+ *             example:
+ *               name: Sample Name
+ *               branch: B.Tech CSE
+ *
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *
+ */
+
+/**
+ * @swagger
+ * /senate/{senateId}/other-members/{otherMemberId}:
+ *   patch:
+ *     summary: Update an other member of a senate
+ *     description: Only admin can update an other member.
+ *     tags: [Senate]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: senateId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Senate id
+ *       - in: path
+ *         name: otherMemberId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: _id of other member
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               branch:
+ *                 type: string
+ *             example:
+ *               name: Sample Name
+ *               branch: B.Tech ECE
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ *   delete:
+ *     summary: Delete an other member
+ *     description: Only admin can delete any other member of senate.
+ *     tags: [Senate]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: senateId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Senate id
+ *       - in: path
+ *         name: otherMemberId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: _id of other member
  *     responses:
  *       "204":
  *         description: No content

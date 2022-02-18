@@ -14,6 +14,10 @@ const contactSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    branch: {
+      type: String,
+      trim: true,
+    },
     imageUrl: {
       type: String,
       required: true,

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 const contactSchema = require('./contact.model').schema;
+const otherMembersSchema = require('./otherMembers.model').schema;
 
 const senateSchema = mongoose.Schema(
   {
@@ -16,6 +17,7 @@ const senateSchema = mongoose.Schema(
       required: true,
     },
     members: [contactSchema],
+    otherMembers: [otherMembersSchema],
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
