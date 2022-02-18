@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const { Senate } = require('../models');
 const ApiError = require('../utils/ApiError');
 
@@ -8,7 +9,7 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Senate>}
  */
 const createSenate = async (body, user) => {
-  const { startYear, endYear, members } = body;
+  const { startYear, endYear, members, otherMembers } = body;
   if (await Senate.doesTenureExist(startYear, endYear)) {
     throw new ApiError(
       httpStatus.BAD_REQUEST,
@@ -18,6 +19,7 @@ const createSenate = async (body, user) => {
   const _id = `${startYear}-${endYear}`;
   const senateBody = {
     ...(members && { members }),
+    ...(otherMembers && { otherMembers }),
     _id,
     startYear,
     endYear,
@@ -48,7 +50,7 @@ const getSenateById = async (id) => {
  * @returns {Promise<QueryResult>}
  */
 const getSenateTenures = async () => {
-  return Senate.find({}, { members: 0 }).sort({ endYear: 'asc' });
+  return Senate.find({}, { members: 0, otherMembers: 0 }).sort({ endYear: 'asc' });
 };
 
 /**
@@ -82,6 +84,66 @@ const deleteSenateById = async (senateId) => {
   return senate;
 };
 
+/**
+ * Add an other member in senate
+ * @param {ObjectId} senateId
+ * @param {Object} body
+ * @param {Object} user
+ * @returns {Promise<Senate>}
+ */
+const addOtherMember = async (senateId, body, user) => {
+  const memberId = new mongoose.Types.ObjectId();
+  await Senate.updateOne(
+    { _id: senateId },
+    { $push: { otherMembers: { ...body, _id: memberId } }, $set: { updatedBy: user.id } }
+  );
+  const data = { ...body, id: memberId };
+  return data;
+};
+
+/**
+ * Update details of an other member in senate
+ * @param {ObjectId} senateId
+ * @param {ObjectId} otherMemberId
+ * @param {Object} body
+ * @param {Object} user
+ * @returns {Promise<Senate>}
+ */
+const updateOtherMember = async (senateId, otherMemberId, body, user) => {
+  const { name, branch } = body;
+  return Senate.updateOne(
+    { _id: senateId, 'otherMembers._id': otherMemberId },
+    {
+      $set: {
+        ...(name && { 'otherMembers.$.name': name }),
+        ...(branch && { 'otherMembers.$.branch': branch }),
+        updatedBy: user.id,
+      },
+    }
+  );
+};
+
+/**
+ * Delete an other member in senate
+ * @param {ObjectId} senateId
+ * @param {ObjectId} otherMemberId
+ * @param {Object} user
+ * @returns {Promise<Senate>}
+ */
+const deleteOtherMember = async (senateId, otherMemberId, user) => {
+  return Senate.updateOne(
+    { _id: senateId },
+    {
+      $pull: {
+        otherMembers: { _id: otherMemberId },
+      },
+      $set: {
+        updatedBy: user.id,
+      },
+    }
+  );
+};
+
 module.exports = {
   createSenate,
   getLatestSenate,
@@ -89,4 +151,7 @@ module.exports = {
   getSenateById,
   updateSenateById,
   deleteSenateById,
+  addOtherMember,
+  updateOtherMember,
+  deleteOtherMember,
 };

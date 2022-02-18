@@ -13,6 +13,7 @@ const allRoles = {
     'manageFestArchives',
     'updateFestArchives',
     'manageSenate',
+    'manageAnnouncements',
   ],
   moderator: ['manageImages', 'manageEvents', 'updateClub', 'manageAchievements', 'updateFest', 'updateFestArchives'],
 };

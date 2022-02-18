@@ -40,6 +40,21 @@ const deleteSenate = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const addOtherMember = catchAsync(async (req, res) => {
+  const data = await senateService.addOtherMember(req.params.senateId, req.body, req.user);
+  res.status(httpStatus.CREATED).send(data);
+});
+
+const updateOtherMember = catchAsync(async (req, res) => {
+  await senateService.updateOtherMember(req.params.senateId, req.params.otherMemberId, req.body, req.user);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
+const deleteOtherMember = catchAsync(async (req, res) => {
+  await senateService.deleteOtherMember(req.params.senateId, req.params.otherMemberId, req.user);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
 module.exports = {
   createSenate,
   getLatestSenate,
@@ -47,4 +62,7 @@ module.exports = {
   getSenateTenures,
   updateSenate,
   deleteSenate,
+  addOtherMember,
+  updateOtherMember,
+  deleteOtherMember,
 };

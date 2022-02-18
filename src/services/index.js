@@ -9,3 +9,4 @@ module.exports.achievementService = require('./achievement.service');
 module.exports.festService = require('./fest.service');
 module.exports.festArchiveService = require('./festArchive.service');
 module.exports.senateService = require('./senate.service');
+module.exports.announcementService = require('./announcement.service');
