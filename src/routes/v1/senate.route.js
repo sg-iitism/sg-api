@@ -258,8 +258,12 @@ module.exports = router;
  *               branch: B.Tech CSE
  *
  *     responses:
- *       "204":
- *         description: No content
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/OtherMember'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

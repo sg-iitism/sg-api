@@ -41,8 +41,8 @@ const deleteSenate = catchAsync(async (req, res) => {
 });
 
 const addOtherMember = catchAsync(async (req, res) => {
-  await senateService.addOtherMember(req.params.senateId, req.body, req.user);
-  res.status(httpStatus.NO_CONTENT).send();
+  const data = await senateService.addOtherMember(req.params.senateId, req.body, req.user);
+  res.status(httpStatus.CREATED).send(data);
 });
 
 const updateOtherMember = catchAsync(async (req, res) => {

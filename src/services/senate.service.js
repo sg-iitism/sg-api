@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const { Senate } = require('../models');
 const ApiError = require('../utils/ApiError');
 
@@ -91,7 +92,13 @@ const deleteSenateById = async (senateId) => {
  * @returns {Promise<Senate>}
  */
 const addOtherMember = async (senateId, body, user) => {
-  return Senate.updateOne({ _id: senateId }, { $push: { otherMembers: body }, $set: { updatedBy: user.id } });
+  const memberId = new mongoose.Types.ObjectId();
+  await Senate.updateOne(
+    { _id: senateId },
+    { $push: { otherMembers: { ...body, _id: memberId } }, $set: { updatedBy: user.id } }
+  );
+  const data = { ...body, id: memberId };
+  return data;
 };
 
 /**

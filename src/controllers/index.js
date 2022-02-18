@@ -6,3 +6,4 @@ module.exports.clubController = require('./club.controller');
 module.exports.achievementController = require('./achievement.controller');
 module.exports.festController = require('./fest.controller');
 module.exports.senateController = require('./senate.controller');
+module.exports.announcementController = require('./announcement.controller');
