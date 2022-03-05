@@ -53,7 +53,12 @@ const updateFest = catchAsync(async (req, res) => {
 });
 
 const updateFestArchiveByYear = catchAsync(async (req, res) => {
-  const festArchive = await festArchiveService.updateFestArchiveByYear(req.params.festId, req.params.year, req.body, req.user);
+  const festArchive = await festArchiveService.updateFestArchiveByYear(
+    req.params.festId,
+    req.params.year,
+    req.body,
+    req.user
+  );
   res.send(festArchive);
 });
 

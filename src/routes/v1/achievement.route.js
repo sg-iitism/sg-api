@@ -12,7 +12,8 @@ router
     auth('manageAchievements'),
     validate(achievementValidation.createAchievement),
     achievementController.createAchievement
-  );
+  )
+  .get(validate(achievementValidation.getAllAchievements), achievementController.getAllAchievements);
 
 router
   .route('/:achievementId')
@@ -84,6 +85,27 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ *
+ *   get:
+ *     summary: Get all the achievements
+ *     tags: [Achievements]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: number
+ *         description: Number of achievements required to display
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Achievement'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
 
 /**

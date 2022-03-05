@@ -8,6 +8,14 @@ const createAchievement = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(achievement);
 });
 
+const getAllAchievements = catchAsync(async (req, res) => {
+  const result = await achievementService.getAllAchievements(req.query.limit);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Achievements not found');
+  }
+  res.send(result);
+});
+
 const getAchievementDetails = catchAsync(async (req, res) => {
   const result = await achievementService.getAchievementById(req.params.achievementId);
   if (!result) {
@@ -28,6 +36,7 @@ const deleteAchievement = catchAsync(async (req, res) => {
 
 module.exports = {
   createAchievement,
+  getAllAchievements,
   getAchievementDetails,
   updateAchievement,
   deleteAchievement,

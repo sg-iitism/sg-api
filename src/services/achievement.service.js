@@ -31,6 +31,20 @@ const createAchievement = async (body, user) => {
 };
 
 /**
+ * Get all the latest achievements
+ * @param {Number} _limit
+ * @returns {Promise<QueryResult>}
+ */
+const getAllAchievements = async (_limit) => {
+  const achievements = await Achievement.find({})
+    .sort({
+      createdAt: 'desc',
+    })
+    .limit(_limit);
+  return achievements;
+};
+
+/**
  * Get all achievements of a club
  * @param {ObjectId} clubId
  * @returns {Promise<QueryResult>}
@@ -104,6 +118,7 @@ const deleteAchievementById = async (achievementId, user) => {
 
 module.exports = {
   createAchievement,
+  getAllAchievements,
   getAchievementsByClubId,
   getAchievementById,
   updateAchievementById,

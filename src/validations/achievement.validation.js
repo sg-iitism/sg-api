@@ -10,6 +10,12 @@ const createAchievement = {
   }),
 };
 
+const getAllAchievements = {
+  query: Joi.object().keys({
+    limit: Joi.number().integer(),
+  }),
+};
+
 const getAchievementDetails = {
   params: Joi.object().keys({
     achievementId: Joi.string(),
@@ -37,6 +43,7 @@ const deleteAchievement = {
 
 module.exports = {
   createAchievement,
+  getAllAchievements,
   getAchievementDetails,
   updateAchievement,
   deleteAchievement,
